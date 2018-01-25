@@ -75,15 +75,18 @@ var ChildClass = /** @class */ (function (_super) {
     };
     ChildClass.prototype.onButtonClick = function () {
         cc.log("onButtonClick...");
-        Global_1.default.getInstance().Panel.show(500, 250);
+        Global_1.default.getInstance().Panel.show(70, 100, this.node);
         Global_1.default.getInstance().SocketUtil.connect();
         var text = new Text();
         text.id = "1111";
         text.message = "aaa";
         var message = new Message();
-        message.cmd = 10001;
+        message.cmd = 20001;
         message.body = Text.encode(text).finish();
         Global_1.default.getInstance().SocketUtil.sendMessage(message);
+    };
+    ChildClass.prototype.onHidePanel = function () {
+        Global_1.default.getInstance().Panel.hide(this.node);
     };
     ChildClass = __decorate([
         ccclass

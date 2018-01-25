@@ -1,38 +1,51 @@
-const {ccclass, property} = cc._decorator;
+export default class Panel {
 
-@ccclass
-export default class Panel extends cc.Component {
+    private panel: cc.Prefab;
 
-	@property(cc.Prefab)
-	private panel: cc.Prefab = null;
+    private isShow: boolean;
 
 
-	public load(): void {
-		cc.log(`Panel load ...`);
-		cc.loader.loadRes("prefab/panel", cc.Prefab, (error, prefab: cc.Prefab) => {
-			if (prefab == null) {
-				return;
-			}
-			this.panel = prefab;
-		});
-	}
+    constructor() {
+        this.isShow = false;
+        this.load();
+    }
 
-	public show(x: number, y: number): void {
-		if (this.panel == null) {
-			return;
-		}
-		cc.log(`panel ${this.panel}`);
-		cc.log(`Panel show ...`);
-		this.panel.data.setPosition(x, y);
-		this.panel.data.active = true;
-		cc.log(`Panel name ${this.panel.name}`);
-	}
+    public load(): void {
+        cc.log(`Panel load ...`);
+        cc.loader.loadRes("prefab/panel", cc.Prefab, (error, prefab: cc.Prefab) => {
+            if (prefab == null) {
+                return;
+            }
+            this.panel = prefab;
+        });
+    }
 
-	public hide(): void {
-		if (this.panel == null) {
-			return;
-		}
-		this.panel.data.active = false;
-	}
+    public show(x: number, y: number, node: cc.Node): void {
+        if (this.panel == null) {
+            return;
+        }
+        if (this.isShow) {
+            return;
+        }
+        cc.log(`panel ${this.panel}`);
+        cc.log(`Panel show ...`);
+        this.panel.data.setPosition(x, y);
+        this.panel.data.active = true;
+        cc.log(`Panel name ${this.panel.name}`);
+        node.addChild(this.panel.data);
+        this.isShow = true;
+    }
+
+    public hide(node: cc.Node): void {
+        if (this.panel == null) {
+            return;
+        }
+        if (!this.isShow) {
+            return;
+        }
+        node.removeChild(this.panel.data);
+        this.panel.data.active = false;
+        this.isShow = false;
+    }
 
 }

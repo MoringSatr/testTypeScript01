@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var protocol_1 = require("./proto/protocol");
 var Message = protocol_1.MessageProto.Message;
 var Constant_1 = require("./Constant");
+var ByteBufferUtil_1 = require("./util/ByteBufferUtil");
 var SocketUtil = /** @class */ (function () {
     function SocketUtil() {
     }
@@ -21,7 +22,15 @@ var SocketUtil = /** @class */ (function () {
     };
     SocketUtil.prototype.sendMessage = function (message) {
         var messageBuf = Message.encode(message).finish();
-        this.socket.send(messageBuf);
+        var buffer = ByteBufferUtil_1.default.uint8ArrayToArrayBuffer(messageBuf);
+        // let buffer:ArrayBuffer = new ArrayBuffer(messageBuf.byteLength);
+        // new Uint8Array(buffer).set(new Uint8Array(messageBuf).subarray(0, messageBuf.byteLength),0);
+        // cc.log(`messageBuf : ${messageBuf}`);
+        // cc.log(`messageBuf.byteLength : ${messageBuf.byteLength}`);
+        // cc.log(`messageBuf.byteOffset : ${messageBuf.byteOffset}`);
+        // cc.log(`buffer : ${buffer}`);
+        // cc.log(`buffer.byteLength : ${buffer.byteLength}`);
+        this.socket.send(buffer);
     };
     SocketUtil.prototype.onConnect = function () {
     };

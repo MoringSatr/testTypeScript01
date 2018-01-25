@@ -17,7 +17,6 @@ export default class Global {
 	public load(): void {
 
 		this.Panel = new Panel();
-		this.Panel.load();
 		this.SocketUtil = new SocketUtil();
 	}
 

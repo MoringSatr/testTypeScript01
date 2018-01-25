@@ -10,7 +10,6 @@ var Global = /** @class */ (function () {
     };
     Global.prototype.load = function () {
         this.Panel = new Panel_1.default();
-        this.Panel.load();
         this.SocketUtil = new SocketUtil_1.default();
     };
     Global.instance = new Global();
