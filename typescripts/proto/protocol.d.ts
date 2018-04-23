@@ -23,9 +23,9 @@ export namespace awesomepackage {
         public awesomeField: string;
 
         /**
-         * Creates a new AwesomeMessage instance using the specified properties.
+         * Creates a new AwesomeMessage GlobalInstance using the specified properties.
          * @param [properties] Properties to set
-         * @returns AwesomeMessage instance
+         * @returns AwesomeMessage GlobalInstance
          */
         public static create(properties?: awesomepackage.IAwesomeMessage): awesomepackage.AwesomeMessage;
 
@@ -123,9 +123,9 @@ export namespace DogProto {
         public age: number;
 
         /**
-         * Creates a new Dog instance using the specified properties.
+         * Creates a new Dog GlobalInstance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Dog instance
+         * @returns Dog GlobalInstance
          */
         public static create(properties?: DogProto.IDog): DogProto.Dog;
 
@@ -223,9 +223,9 @@ export namespace MessageProto {
         public body: Uint8Array;
 
         /**
-         * Creates a new Message instance using the specified properties.
+         * Creates a new Message GlobalInstance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Message instance
+         * @returns Message GlobalInstance
          */
         public static create(properties?: MessageProto.IMessage): MessageProto.Message;
 
@@ -319,9 +319,9 @@ export namespace MessageProto {
         public message: string;
 
         /**
-         * Creates a new Text instance using the specified properties.
+         * Creates a new Text GlobalInstance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Text instance
+         * @returns Text GlobalInstance
          */
         public static create(properties?: MessageProto.IText): MessageProto.Text;
 

@@ -1,8 +1,8 @@
 import SuperClass from "./SuperClass";
-import Global from "./Global";
 import {MessageProto} from "./proto/protocol";
 import Text = MessageProto.Text;
 import Message = MessageProto.Message;
+import Global from "./Global";
 
 const {ccclass} = cc._decorator;
 

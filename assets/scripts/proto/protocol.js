@@ -39,16 +39,16 @@ $root.awesomepackage = function () {
          * AwesomeMessage awesomeField.
          * @member {string} awesomeField
          * @memberof awesomepackage.AwesomeMessage
-         * @instance
+         * @GlobalInstance
          */
         AwesomeMessage.prototype.awesomeField = "";
         /**
-         * Creates a new AwesomeMessage instance using the specified properties.
+         * Creates a new AwesomeMessage GlobalInstance using the specified properties.
          * @function create
          * @memberof awesomepackage.AwesomeMessage
          * @static
          * @param {awesomepackage.IAwesomeMessage=} [properties] Properties to set
-         * @returns {awesomepackage.AwesomeMessage} AwesomeMessage instance
+         * @returns {awesomepackage.AwesomeMessage} AwesomeMessage GlobalInstance
          */
         AwesomeMessage.create = function create(properties) {
             return new AwesomeMessage(properties);
@@ -179,7 +179,7 @@ $root.awesomepackage = function () {
          * Converts this AwesomeMessage to JSON.
          * @function toJSON
          * @memberof awesomepackage.AwesomeMessage
-         * @instance
+         * @GlobalInstance
          * @returns {Object.<string,*>} JSON object
          */
         AwesomeMessage.prototype.toJSON = function toJSON() {
@@ -223,23 +223,23 @@ $root.DogProto = function () {
          * Dog name.
          * @member {string} name
          * @memberof DogProto.Dog
-         * @instance
+         * @GlobalInstance
          */
         Dog.prototype.name = "";
         /**
          * Dog age.
          * @member {number} age
          * @memberof DogProto.Dog
-         * @instance
+         * @GlobalInstance
          */
         Dog.prototype.age = 0;
         /**
-         * Creates a new Dog instance using the specified properties.
+         * Creates a new Dog GlobalInstance using the specified properties.
          * @function create
          * @memberof DogProto.Dog
          * @static
          * @param {DogProto.IDog=} [properties] Properties to set
-         * @returns {DogProto.Dog} Dog instance
+         * @returns {DogProto.Dog} Dog GlobalInstance
          */
         Dog.create = function create(properties) {
             return new Dog(properties);
@@ -384,7 +384,7 @@ $root.DogProto = function () {
          * Converts this Dog to JSON.
          * @function toJSON
          * @memberof DogProto.Dog
-         * @instance
+         * @GlobalInstance
          * @returns {Object.<string,*>} JSON object
          */
         Dog.prototype.toJSON = function toJSON() {
@@ -428,23 +428,23 @@ $root.MessageProto = function () {
          * Message cmd.
          * @member {number} cmd
          * @memberof MessageProto.Message
-         * @instance
+         * @GlobalInstance
          */
         Message.prototype.cmd = 0;
         /**
          * Message body.
          * @member {Uint8Array} body
          * @memberof MessageProto.Message
-         * @instance
+         * @GlobalInstance
          */
         Message.prototype.body = $util.newBuffer([]);
         /**
-         * Creates a new Message instance using the specified properties.
+         * Creates a new Message GlobalInstance using the specified properties.
          * @function create
          * @memberof MessageProto.Message
          * @static
          * @param {MessageProto.IMessage=} [properties] Properties to set
-         * @returns {MessageProto.Message} Message instance
+         * @returns {MessageProto.Message} Message GlobalInstance
          */
         Message.create = function create(properties) {
             return new Message(properties);
@@ -592,7 +592,7 @@ $root.MessageProto = function () {
          * Converts this Message to JSON.
          * @function toJSON
          * @memberof MessageProto.Message
-         * @instance
+         * @GlobalInstance
          * @returns {Object.<string,*>} JSON object
          */
         Message.prototype.toJSON = function toJSON() {
@@ -627,23 +627,23 @@ $root.MessageProto = function () {
          * Text id.
          * @member {string} id
          * @memberof MessageProto.Text
-         * @instance
+         * @GlobalInstance
          */
         Text.prototype.id = "";
         /**
          * Text message.
          * @member {string} message
          * @memberof MessageProto.Text
-         * @instance
+         * @GlobalInstance
          */
         Text.prototype.message = "";
         /**
-         * Creates a new Text instance using the specified properties.
+         * Creates a new Text GlobalInstance using the specified properties.
          * @function create
          * @memberof MessageProto.Text
          * @static
          * @param {MessageProto.IText=} [properties] Properties to set
-         * @returns {MessageProto.Text} Text instance
+         * @returns {MessageProto.Text} Text GlobalInstance
          */
         Text.create = function create(properties) {
             return new Text(properties);
@@ -788,7 +788,7 @@ $root.MessageProto = function () {
          * Converts this Text to JSON.
          * @function toJSON
          * @memberof MessageProto.Text
-         * @instance
+         * @GlobalInstance
          * @returns {Object.<string,*>} JSON object
          */
         Text.prototype.toJSON = function toJSON() {

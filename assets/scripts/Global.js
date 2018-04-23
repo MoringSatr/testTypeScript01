@@ -6,13 +6,18 @@ var Global = /** @class */ (function () {
     function Global() {
     }
     Global.getInstance = function () {
-        return this.instance;
+        return GlobalInstance.instance;
     };
     Global.prototype.load = function () {
         this.Panel = new Panel_1.default();
         this.SocketUtil = new SocketUtil_1.default();
     };
-    Global.instance = new Global();
     return Global;
 }());
 exports.default = Global;
+var GlobalInstance = /** @class */ (function () {
+    function GlobalInstance() {
+    }
+    GlobalInstance.instance = new Global();
+    return GlobalInstance;
+}());

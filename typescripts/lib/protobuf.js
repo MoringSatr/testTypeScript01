@@ -235,7 +235,7 @@ base64.test = function test(string) {
 module.exports = EventEmitter;
 
 /**
- * Constructs a new event emitter instance.
+ * Constructs a new event emitter GlobalInstance.
  * @classdesc A minimal event emitter.
  * @memberof util
  * @constructor
@@ -876,7 +876,7 @@ function indexOutOfRange(reader, writeLength) {
 }
 
 /**
- * Constructs a new reader instance using the specified buffer.
+ * Constructs a new reader GlobalInstance using the specified buffer.
  * @classdesc Wire format reader using `Uint8Array` if available, otherwise `Array`.
  * @constructor
  * @param {Uint8Array} buffer Buffer to read from
@@ -1279,7 +1279,7 @@ var Reader = require(9);
 var util = require(15);
 
 /**
- * Constructs a new buffer reader instance.
+ * Constructs a new buffer reader GlobalInstance.
  * @classdesc Wire format reader using node buffers.
  * @extends Reader
  * @constructor
@@ -1405,7 +1405,7 @@ var util = require(15);
  */
 
 /**
- * Constructs a new RPC service instance.
+ * Constructs a new RPC service GlobalInstance.
  * @classdesc An RPC service as returned by {@link Service#create}.
  * @exports rpc.Service
  * @extends util.EventEmitter
@@ -1801,7 +1801,7 @@ util.isObject = function isObject(value) {
  * Checks if a property on a message is considered to be present.
  * This is an alias of {@link util.isSet}.
  * @function
- * @param {Object} obj Plain object or message instance
+ * @param {Object} obj Plain object or message GlobalInstance
  * @param {string} prop Property name
  * @returns {boolean} `true` if considered to be present, otherwise `false`
  */
@@ -1809,7 +1809,7 @@ util.isset =
 
 /**
  * Checks if a property on a message is considered to be present.
- * @param {Object} obj Plain object or message instance
+ * @param {Object} obj Plain object or message GlobalInstance
  * @param {string} prop Property name
  * @returns {boolean} `true` if considered to be present, otherwise `false`
  */
@@ -1821,8 +1821,8 @@ util.isSet = function isSet(obj, prop) {
 };
 
 /**
- * Any compatible Buffer instance.
- * This is a minimal stand-alone definition of a Buffer instance. The actual type is that exported by node's typings.
+ * Any compatible Buffer GlobalInstance.
+ * This is a minimal stand-alone definition of a Buffer GlobalInstance. The actual type is that exported by node's typings.
  * @interface Buffer
  * @extends Uint8Array
  */
@@ -1873,8 +1873,8 @@ util.newBuffer = function newBuffer(sizeOrArray) {
 util.Array = typeof Uint8Array !== "undefined" ? Uint8Array /* istanbul ignore next */ : Array;
 
 /**
- * Any compatible Long instance.
- * This is a minimal stand-alone definition of a Long instance. The actual type is that exported by long.js.
+ * Any compatible Long GlobalInstance.
+ * This is a minimal stand-alone definition of a Long GlobalInstance. The actual type is that exported by long.js.
  * @interface Long
  * @property {number} low Low bits
  * @property {number} high High bits
@@ -1972,7 +1972,7 @@ function newError(name) {
             return new CustomError(message, properties);
 
         // Error.call(this, message);
-        // ^ just returns a new error instance because the ctor can be called as a function
+        // ^ just returns a new error GlobalInstance because the ctor can be called as a function
 
         Object.defineProperty(this, "message", { get: function() { return message; } });
 
@@ -2012,14 +2012,14 @@ util.newError = newError;
  * try {
  *     MyMessage.decode(someBuffer); // throws if required fields are missing
  * } catch (e) {
- *     if (e instanceof ProtocolError && e.instance)
- *         console.log("decoded so far: " + JSON.stringify(e.instance));
+ *     if (e instanceof ProtocolError && e.GlobalInstance)
+ *         console.log("decoded so far: " + JSON.stringify(e.GlobalInstance));
  * }
  */
 util.ProtocolError = newError("ProtocolError");
 
 /**
- * So far decoded message instance.
+ * So far decoded message GlobalInstance.
  * @name util.ProtocolError#instance
  * @type {Message<T>}
  */
@@ -2138,7 +2138,7 @@ var LongBits  = util.LongBits,
     utf8      = util.utf8;
 
 /**
- * Constructs a new writer operation instance.
+ * Constructs a new writer operation GlobalInstance.
  * @classdesc Scheduled writer operation.
  * @constructor
  * @param {function(*, Uint8Array, number)} fn Function to call
@@ -2177,7 +2177,7 @@ function Op(fn, len, val) {
 function noop() {} // eslint-disable-line no-empty-function
 
 /**
- * Constructs a new writer state instance.
+ * Constructs a new writer state GlobalInstance.
  * @classdesc Copied writer state.
  * @memberof Writer
  * @constructor
@@ -2212,7 +2212,7 @@ function State(writer) {
 }
 
 /**
- * Constructs a new writer instance.
+ * Constructs a new writer GlobalInstance.
  * @classdesc Wire format writer using `Uint8Array` if available, otherwise `Array`.
  * @constructor
  */
@@ -2306,7 +2306,7 @@ function writeVarint32(val, buf, pos) {
 }
 
 /**
- * Constructs a new varint writer operation instance.
+ * Constructs a new varint writer operation GlobalInstance.
  * @classdesc Scheduled varint writer operation.
  * @extends Op
  * @constructor
@@ -2532,7 +2532,7 @@ Writer.prototype.fork = function fork() {
 };
 
 /**
- * Resets this instance to the last state.
+ * Resets this GlobalInstance to the last state.
  * @returns {Writer} `this`
  */
 Writer.prototype.reset = function reset() {
@@ -2599,7 +2599,7 @@ var util = require(15);
 var Buffer = util.Buffer;
 
 /**
- * Constructs a new buffer writer instance.
+ * Constructs a new buffer writer GlobalInstance.
  * @classdesc Wire format writer using node buffers.
  * @extends Writer
  * @constructor

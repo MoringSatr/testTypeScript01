@@ -52,10 +52,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var SuperClass_1 = require("./SuperClass");
-var Global_1 = require("./Global");
 var protocol_1 = require("./proto/protocol");
 var Text = protocol_1.MessageProto.Text;
 var Message = protocol_1.MessageProto.Message;
+var Global_1 = require("./Global");
 var ccclass = cc._decorator.ccclass;
 var ChildClass = /** @class */ (function (_super) {
     __extends(ChildClass, _super);

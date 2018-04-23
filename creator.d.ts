@@ -2465,7 +2465,7 @@ declare module cc {
 		!#en
 		Adds an action with a target.<br/>
 		If the target is already present, then the action will be added to the existing target.
-		If the target is not present, a new instance of this target will be created either paused or not, and the action will be added to the newly created target.
+		If the target is not present, a new GlobalInstance of this target will be created either paused or not, and the action will be added to the newly created target.
 		When the target is paused, the queued actions won't be 'ticked'.
 		!#zh
 		增加一个动作，同时还需要提供动作的目标对象，目标对象是否暂停作为参数。<br/>
@@ -2560,7 +2560,7 @@ declare module cc {
 		pauseTargets(targetsToPause: any[]): void;		
 		/**
 		!#en
-		purges the shared action manager. It releases the retained instance. <br/>
+		purges the shared action manager. It releases the retained GlobalInstance. <br/>
 		because it uses this, so it can not be static.
 		!#zh
 		清除共用的动作管理器。它释放了持有的实例。 <br/>
@@ -5869,7 +5869,7 @@ declare module cc {
 	<p>
 	    The base class of event listener.                                                                        <br/>
 	    If you need custom listener which with different callback, you need to inherit this class.               <br/>
-	    For instance, you could refer to EventListenerAcceleration, EventListenerKeyboard,                       <br/>
+	    For GlobalInstance, you could refer to EventListenerAcceleration, EventListenerKeyboard,                       <br/>
 	     EventListenerTouchOneByOne, EventListenerCustom.
 	</p>
 	
@@ -6402,7 +6402,7 @@ declare module cc {
 		You can add your own download function with addLoadHandlers */
 		static loader: any;		
 		/**
-		Gets a new XMLHttpRequest instance. 
+		Gets a new XMLHttpRequest GlobalInstance.
 		*/
 		static getXMLHttpRequest(): XMLHttpRequest;		
 		/**
@@ -6636,7 +6636,7 @@ declare module cc {
 		// Release all dependencies of a loaded prefab
 		var deps = cc.loader.getDependsRecursively('prefabs/sample');
 		cc.loader.release(deps);
-		// If there is no instance of this prefab in the scene, the prefab and its dependencies like textures, sprite frames, etc, will be freed up.
+		// If there is no GlobalInstance of this prefab in the scene, the prefab and its dependencies like textures, sprite frames, etc, will be freed up.
 		// If you have some other nodes share a texture in this prefab, you can skip it in two ways:
 		// 1. Forbid auto release a texture before release
 		cc.loader.setAutoRelease(texture2d, false);
@@ -14903,14 +14903,14 @@ declare module anysdk {
 		setIsAnaylticsEnabled(enabled: boolean): void;		
 		/**
 		!#en
-		destory instance
+		destory GlobalInstance
 		!#zh
 		销毁单例 
 		*/
 		static end(): void;		
 		/**
 		!#en
-		get instance
+		get GlobalInstance
 		!#zh
 		获取单例 
 		*/
@@ -16096,7 +16096,7 @@ declare module dragonBones {
 	/** !#en
 	The Armature Display of DragonBones <br/>
 	<br/>
-	(Armature Display has a reference to a DragonBonesAsset and stores the state for ArmatureDisplay instance,
+	(Armature Display has a reference to a DragonBonesAsset and stores the state for ArmatureDisplay GlobalInstance,
 	which consists of the current pose's bone SRT, slot colors, and which slot attachments are visible. <br/>
 	Multiple Armature Display can use the same DragonBonesAsset which includes all animations, skins, and attachments.) <br/>
 	!#zh
@@ -16237,7 +16237,7 @@ declare module sp {
 	/** !#en
 	The skeleton of Spine <br/>
 	<br/>
-	(Skeleton has a reference to a SkeletonData and stores the state for skeleton instance,
+	(Skeleton has a reference to a SkeletonData and stores the state for skeleton GlobalInstance,
 	which consists of the current pose's bone SRT, slot colors, and which slot attachments are visible. <br/>
 	Multiple skeletons can use the same SkeletonData which includes all animations, skins, and attachments.) <br/>
 	!#zh
@@ -17010,7 +17010,7 @@ declare module cc.js {
 	/**
 	Get class name of the object, if object is just a {} (and which class named 'Object'), it will return "".
 	(modified from <a href="http://stackoverflow.com/questions/1249531/how-to-get-a-javascript-objects-class">the code from this stackoverflow post</a>)
-	@param objOrCtor instance or constructor 
+	@param objOrCtor GlobalInstance or constructor
 	*/
 	export function getClassName(objOrCtor: any|Function): string;	
 	/**
@@ -17103,7 +17103,7 @@ declare module cc.js {
 		*/
 		static verifyType(array: any[], type: Function): boolean;		
 		/**
-		Removes from array all values in minusArr. For each Value in minusArr, the first matching instance in array will be removed.
+		Removes from array all values in minusArr. For each Value in minusArr, the first matching GlobalInstance in array will be removed.
 		@param array Source Array
 		@param minusArr minus Array 
 		*/

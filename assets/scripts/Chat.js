@@ -16,6 +16,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var Event1_1 = require("./even/Event1");
+var Event2_1 = require("./even/Event2");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var Chat = /** @class */ (function (_super) {
     __extends(Chat, _super);
@@ -23,9 +25,26 @@ var Chat = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.input = null;
         _this.scrollview = null;
+        _this.events = new Map();
         return _this;
     }
     Chat.prototype.start = function () {
+        var map = new Map();
+        map.set("qq", 11);
+        map.set("qq1", 112);
+        map.set("qq2", 111);
+        map.set("qq", 22222);
+        cc.log("map : " + map);
+        map.forEach(function (value, key) {
+            cc.log("mapStr  key:" + key + " , value:" + value);
+        });
+        var event1 = new Event1_1.default();
+        var event2 = new Event2_1.default();
+        this.events.set(event1.eventType, event1);
+        this.events.set(event2.eventType, event2);
+        this.events.forEach(function (event) {
+            event.exc();
+        });
     };
     Chat.prototype.sendMessage = function () {
     };

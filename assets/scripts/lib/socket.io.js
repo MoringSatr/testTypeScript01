@@ -16,7 +16,7 @@ if (!cc.sys.isNative) {
                 function r(t, e) {
                     "object" === ("undefined" == typeof t ? "undefined" : o(t)) && (e = t, t = void 0), e = e || {};
                     var n, r = i(t), s = r.source, u = r.id, h = r.path, f = p[u] && h in p[u].nsps, l = e.forceNew || e["force new connection"] || !1 === e.multiplex || f;
-                    return l ? (c("ignoring socket cache for %s", s), n = a(s, e)) : (p[u] || (c("new io instance for %s", s), p[u] = a(s, e)), n = p[u]), r.query && !e.query && (e.query = r.query), n.socket(r.path, e);
+                    return l ? (c("ignoring socket cache for %s", s), n = a(s, e)) : (p[u] || (c("new io GlobalInstance for %s", s), p[u] = a(s, e)), n = p[u]), r.query && !e.query && (e.query = r.query), n.socket(r.path, e);
                 }
                 var o = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
                     return typeof t;

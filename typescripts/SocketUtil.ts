@@ -1,7 +1,6 @@
 import {MessageProto} from "./proto/protocol";
 import Message = MessageProto.Message;
 import Constant from "./Constant";
-import Map = dragonBones.Map;
 import ByteBufferUtil from "./util/ByteBufferUtil";
 
 
@@ -9,7 +8,7 @@ export default class SocketUtil {
 
     private socket;
 
-    private handlers: Map<Function>;
+    private handlers;
 
     constructor() {
     }
@@ -33,13 +32,6 @@ export default class SocketUtil {
     public sendMessage(message: Message) {
         let messageBuf = Message.encode(message).finish();
         let buffer: ArrayBuffer = ByteBufferUtil.uint8ArrayToArrayBuffer(messageBuf);
-        // let buffer:ArrayBuffer = new ArrayBuffer(messageBuf.byteLength);
-        // new Uint8Array(buffer).set(new Uint8Array(messageBuf).subarray(0, messageBuf.byteLength),0);
-        // cc.log(`messageBuf : ${messageBuf}`);
-        // cc.log(`messageBuf.byteLength : ${messageBuf.byteLength}`);
-        // cc.log(`messageBuf.byteOffset : ${messageBuf.byteOffset}`);
-        // cc.log(`buffer : ${buffer}`);
-        // cc.log(`buffer.byteLength : ${buffer.byteLength}`);
         this.socket.send(buffer);
     }
 

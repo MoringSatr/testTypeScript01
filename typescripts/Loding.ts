@@ -1,4 +1,5 @@
 import Global from "./Global";
+import {Socket} from "net";
 
 const {ccclass, property} = cc._decorator;
 
@@ -6,12 +7,12 @@ const {ccclass, property} = cc._decorator;
 export default class Loding extends cc.Component {
 
 
-	start() {
-		Global.getInstance().load();
-		setTimeout(() => {
-			cc.director.loadScene("helloworld");
-		}, 1000);
-	}
+    start() {
+        Global.getInstance().load();
+        setTimeout(() => {
+            cc.director.loadScene("helloworld");
+        }, 1000);
+    }
 
 
 }

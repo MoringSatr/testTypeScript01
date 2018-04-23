@@ -23,13 +23,6 @@ var SocketUtil = /** @class */ (function () {
     SocketUtil.prototype.sendMessage = function (message) {
         var messageBuf = Message.encode(message).finish();
         var buffer = ByteBufferUtil_1.default.uint8ArrayToArrayBuffer(messageBuf);
-        // let buffer:ArrayBuffer = new ArrayBuffer(messageBuf.byteLength);
-        // new Uint8Array(buffer).set(new Uint8Array(messageBuf).subarray(0, messageBuf.byteLength),0);
-        // cc.log(`messageBuf : ${messageBuf}`);
-        // cc.log(`messageBuf.byteLength : ${messageBuf.byteLength}`);
-        // cc.log(`messageBuf.byteOffset : ${messageBuf.byteOffset}`);
-        // cc.log(`buffer : ${buffer}`);
-        // cc.log(`buffer.byteLength : ${buffer.byteLength}`);
         this.socket.send(buffer);
     };
     SocketUtil.prototype.onConnect = function () {
