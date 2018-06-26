@@ -1,5 +1,4 @@
 import Global from "./Global";
-import {Socket} from "net";
 
 const {ccclass, property} = cc._decorator;
 

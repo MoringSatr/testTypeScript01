@@ -410,9 +410,9 @@
                                     writeUint(1 / val > 0 ? /* positive */ 0 : /* negative 0 */ 2147483648, buf, pos);
                                 else if (isNaN(val))
                                     writeUint(2143289344, buf, pos);
-                                else if (val > 3.4028234663852886e+38)
+                                else if (val > 3.4028234663852886e+38) // +-Infinity
                                     writeUint((sign << 31 | 2139095040) >>> 0, buf, pos);
-                                else if (val < 1.1754943508222875e-38)
+                                else if (val < 1.1754943508222875e-38) // denormal
                                     writeUint((sign << 31 | Math.round(val / 1.401298464324817e-45)) >>> 0, buf, pos);
                                 else {
                                     var exponent = Math.floor(Math.log(val) / Math.LN2), mantissa = Math.round(val * Math.pow(2, -exponent) * 8388608) & 8388607;
@@ -506,13 +506,13 @@
                                     writeUint(0, buf, pos + off0);
                                     writeUint(2146959360, buf, pos + off1);
                                 }
-                                else if (val > 1.7976931348623157e+308) {
+                                else if (val > 1.7976931348623157e+308) { // +-Infinity
                                     writeUint(0, buf, pos + off0);
                                     writeUint((sign << 31 | 2146435072) >>> 0, buf, pos + off1);
                                 }
                                 else {
                                     var mantissa;
-                                    if (val < 2.2250738585072014e-308) {
+                                    if (val < 2.2250738585072014e-308) { // denormal
                                         mantissa = val / 5e-324;
                                         writeUint(mantissa >>> 0, buf, pos + off0);
                                         writeUint((sign << 31 | mantissa / 4294967296) >>> 0, buf, pos + off1);
@@ -629,7 +629,7 @@
                             offset = 0;
                         }
                         var buf = slice.call(slab, offset, offset += size);
-                        if (offset & 7)
+                        if (offset & 7) // align to 32 bit
                             offset = (offset | 7) + 1;
                         return buf;
                     };
@@ -884,7 +884,7 @@
                     // tends to deopt with local vars for octet etc.
                     var bits = new LongBits(0, 0);
                     var i = 0;
-                    if (this.len - this.pos > 4) {
+                    if (this.len - this.pos > 4) { // fast route (lo)
                         for (; i < 4; ++i) {
                             // 1st..4th
                             bits.lo = (bits.lo | (this.buf[this.pos] & 127) << i * 7) >>> 0;
@@ -912,7 +912,7 @@
                         bits.lo = (bits.lo | (this.buf[this.pos++] & 127) << i * 7) >>> 0;
                         return bits;
                     }
-                    if (this.len - this.pos > 4) {
+                    if (this.len - this.pos > 4) { // fast route (hi)
                         for (; i < 5; ++i) {
                             // 6th..10th
                             bits.hi = (bits.hi | (this.buf[this.pos] & 127) << i * 7 + 3) >>> 0;
@@ -987,7 +987,7 @@
                     return readFixed32_end(this.buf, this.pos += 4) | 0;
                 };
                 /* eslint-disable no-invalid-this */
-                function readFixed64() {
+                function readFixed64( /* this: Reader */) {
                     /* istanbul ignore if */
                     if (this.pos + 8 > this.len)
                         throw indexOutOfRange(this, 8);
@@ -1042,7 +1042,7 @@
                     if (end > this.len)
                         throw indexOutOfRange(this, length);
                     this.pos += length;
-                    if (Array.isArray(this.buf))
+                    if (Array.isArray(this.buf)) // plain array
                         return this.buf.slice(start, end);
                     return start === end // fix for IE 10/Win8 and others' subarray returning array of size 1
                         ? new this.buf.constructor(0)
@@ -1094,7 +1094,7 @@
                             this.skip(this.uint32());
                             break;
                         case 3:
-                            do {
+                            do { // eslint-disable-line no-constant-condition
                                 if ((wireType = this.uint32() & 7) === 4)
                                     break;
                                 this.skipType(wireType);
@@ -1333,7 +1333,7 @@
                  */
                 Service.prototype.end = function end(endedByRPC) {
                     if (this.rpcImpl) {
-                        if (!endedByRPC)
+                        if (!endedByRPC) // signal end to rpcImpl
                             this.rpcImpl(null, null, null);
                         this.rpcImpl = null;
                         this.emit("end").off();
@@ -1587,7 +1587,7 @@
                      */
                     util.isSet = function isSet(obj, prop) {
                         var value = obj[prop];
-                        if (value != null && obj.hasOwnProperty(prop))
+                        if (value != null && obj.hasOwnProperty(prop)) // eslint-disable-line eqeqeq, no-prototype-builtins
                             return typeof value !== "object" || (Array.isArray(value) ? value.length : Object.keys(value).length) > 0;
                         return false;
                     };
@@ -1728,7 +1728,7 @@
                         // ^ just returns a new error GlobalInstance because the ctor can be called as a function
                         Object.defineProperty(this, "message", { get: function () { return message; } });
                         /* istanbul ignore next */
-                        if (Error.captureStackTrace)
+                        if (Error.captureStackTrace) // node
                             Error.captureStackTrace(this, CustomError);
                         else
                             Object.defineProperty(this, "stack", { value: (new Error()).stack || "" });
@@ -2294,10 +2294,10 @@
                     }
                     /* istanbul ignore next */
                     : function writeBytesBuffer_copy(val, buf, pos) {
-                        if (val.copy)
+                        if (val.copy) // Buffer values
                             val.copy(buf, pos, 0, val.length);
                         else
-                            for (var i = 0; i < val.length;)
+                            for (var i = 0; i < val.length;) // plain array values
                                 buf[pos++] = val[i++];
                     };
                 /**
@@ -2313,7 +2313,7 @@
                     return this;
                 };
                 function writeStringBuffer(val, buf, pos) {
-                    if (val.length < 40)
+                    if (val.length < 40) // plain js is faster for short strings (probably due to redundant assertions)
                         util.utf8.write(val, buf, pos);
                     else
                         buf.utf8Write(val, pos);
